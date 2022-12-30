@@ -30,6 +30,7 @@ brew install tcl-tk
 brew install protobuf
 brew install pyenv
 brew install pipenv
+brew install mas
 echo "Successfully installed Homebrew packages!"
 
 # Install Homebrew casks
@@ -47,7 +48,28 @@ brew install --cask google-drive
 brew install --cask microsoft-word
 brew install --cask microsoft-excel
 brew install --cask microsoft-powerpoint
+brew install --cask onedrive
+brew install --cask musescore
+brew install --cask cyberduck
+brew install --cask amazon-music
+brew install --cask kindle
+brew install --cask unity-hub
+brew install --cask notion
 echo "Successfully installed Homebrew casks!"
+
+# Install mas
+echo "Installing App Store apps..."
+echo "Login your Apple ID"
+mas signin
+
+mas install 441258766 # Magnet
+# mas install 409183694 # Keynote
+# mas install 409201541 # Pages
+# mas install 409203825 # Numbers
+mas install 497799835 # Xcode
+mas install 539883307 # LINE
+mas install 405843582 # Alfred
+echo "Successfully installed App Store apps!"
 
 # setup pyenv
 echo "Setting up pyenv..."
@@ -128,6 +150,10 @@ EOS
 
 echo "Successfully wrote to .zshrc!"
 
+# reflrct changes
+echo "Reflrcting changes..."
+source ~/.zshrc
+echo "Successfully reflrcted changes!"
 
 # setup System Preferences
 echo "Setting up System Preferences..."
