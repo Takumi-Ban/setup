@@ -8,6 +8,7 @@ sudo -v
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 touch ~/.zshrc
+echo '# Homebrew' >> ~/.zshrc
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
 eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "Successfully installed Homebrew!"
@@ -21,23 +22,19 @@ brew install zsh
 brew install postgresql
 brew install mysql@5.7
 brew install node
-brew install ncurses
 brew install nginx
 brew install openssl@1.1
-brew install pcre2
 brew install phpmyadmin
 brew install tcl-tk
-brew install protobuf
 brew install pyenv
 brew install pipenv
-brew install mas
 echo "Successfully installed Homebrew packages!"
 
 # Install Homebrew casks
 echo "Installing Homebrew casks..."
 brew install --cask google-chrome
 brew install --cask visual-studio-code
-# brew install --cask iterm2
+brew install --cask iterm2
 brew install --cask docker
 brew install --cask slack
 # brew install --cask spotify
@@ -57,22 +54,9 @@ brew install --cask unity-hub
 brew install --cask notion
 echo "Successfully installed Homebrew casks!"
 
-# Install mas
-echo "Installing App Store apps..."
-echo "Login your Apple ID"
-mas signin
-
-mas install 441258766 # Magnet
-# mas install 409183694 # Keynote
-# mas install 409201541 # Pages
-# mas install 409203825 # Numbers
-mas install 497799835 # Xcode
-mas install 539883307 # LINE
-mas install 405843582 # Alfred
-echo "Successfully installed App Store apps!"
-
 # setup pyenv
 echo "Setting up pyenv..."
+echo '# Pyenv' >> ~/.zshrc
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
@@ -99,20 +83,6 @@ PROMPT="
 %F{green}${ARCH}%f:%F{blue}%~%f
 %F{magenta}❯%f "
 
-setopt share_history
-autoload -Uz colors ; colors
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-# (for M1) ARM / x86 Switcher
-switch-arch() {
-    if  [[ "$(uname -m)" == arm64 ]]; then
-       arch=x86_64
-    elif [[ "$(uname -m)" == x86_64 ]]; then
-       arch=arm64e
-    fi
-    exec arch -arch $arch "$SHELL"
-}
-
 # alias
 alias ls="ls -G"
 alias ll="ls -lG"
@@ -123,29 +93,6 @@ alias rm="trash -F"
 alias swa="switch-arch()"
 alias w='() { curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Tokyo}" }'
 alias reshell='exec $SHELL -l'
-
-# Hyper Config
-# Override auto-title when static titles are desired ($ title My new title)
-title() { export TITLE_OVERRIDDEN=1; echo -en "\e]0;$*\a"}
-# Turn off static titles ($ autotitle)
-autotitle() { export TITLE_OVERRIDDEN=0 }; autotitle
-# Condition checking if title is overridden
-overridden() { [[ $TITLE_OVERRIDDEN == 1 ]]; }
-# Echo asterisk if git state is dirty
-gitDirty() { [[ $(git status 2> /dev/null | grep -o '\w\+' | tail -n1) != ("clean"|"") ]] && echo "*" }
-
-# Show cwd when shell prompts for input.
-precmd() {
-   if overridden; then return; fi
-   cwd=${$(pwd)##*/} # Extract current working dir only
-   print -Pn "\e]0;$cwd$(gitDirty)\a" # Replace with $pwd to show full path
-}
-
-# Prepend command (w/o arguments) to cwd while waiting for command to complete.
-preexec() {
-   if overridden; then return; fi
-   printf "\033]0;%s\a" "${1%% *} | $cwd$(gitDirty)" # Omit construct from $1 to show args
-}
 EOS
 
 echo "Successfully wrote to .zshrc!"
@@ -216,6 +163,14 @@ defaults write com.apple.finder ShowTabView -bool true
 chflags nohidden ~/Library
 # Show the hidden files 
 defaults write com.apple.finder AppleShowAllFiles YES
+# Show the file extensions
+defaults write -g AppleShowAllExtensions -bool true
+# Show the full path in the title bar
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# Show the item info near the icons
+defaults write com.apple.finder ShowItemInfo -bool true
+# disable create .DS_Store on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 ## Restart Finder
 killall Finder
