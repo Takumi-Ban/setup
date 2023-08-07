@@ -18,40 +18,37 @@ echo "Installing Homebrew packages..."
 brew install git
 brew install htop
 brew install wget
-brew install zsh
 brew install postgresql
-brew install mysql@5.7
 brew install node
-brew install nginx
-brew install openssl@1.1
-brew install phpmyadmin
-brew install tcl-tk
 brew install pyenv
-brew install pipenv
+brew install marp-cli
 echo "Successfully installed Homebrew packages!"
 
 # Install Homebrew casks
 echo "Installing Homebrew casks..."
-brew install --cask google-chrome
-brew install --cask visual-studio-code
-brew install --cask iterm2
-brew install --cask docker
-brew install --cask slack
-# brew install --cask spotify
-brew install --cask zoom
+brew install --cask brave-browser
 brew install --cask discord
-brew install --cask hyper
+brew install --cask docker
+brew install --cask font-jetbrains-mono
+brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask github
+brew install --cask google-chrome
 brew install --cask google-drive
-brew install --cask microsoft-word
+brew install --cask google-japanese-ime
+brew install --cask hyper
+brew install --cask karabiner-elements
+brew install --cask microsoft-edge
 brew install --cask microsoft-excel
 brew install --cask microsoft-powerpoint
-brew install --cask onedrive
-brew install --cask musescore
-brew install --cask cyberduck
-brew install --cask amazon-music
-brew install --cask kindle
-brew install --cask unity-hub
+brew install --cask microsoft-word
+brew install --cask microsoft-teams
 brew install --cask notion
+brew install --cask obs
+brew install --cask onedrive
+brew install --cask raspberry-pi-imager
+brew install --cask slack
+brew install --cask visual-studio-code
+brew install --cask zoom
 echo "Successfully installed Homebrew casks!"
 
 # setup pyenv
