@@ -22,6 +22,7 @@ brew install postgresql
 brew install node
 brew install pyenv
 brew install marp-cli
+brew install trash
 echo "Successfully installed Homebrew packages!"
 
 # Install Homebrew casks
